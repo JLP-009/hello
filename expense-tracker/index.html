@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExpenseFlow | Daily Expense Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8gYdNQ+T9M+8dW2n9pY4R1vR5E6S0Kw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="app-header">
+      <div class="container header-content">
+        <div class="brand">
+          <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+          <h1>ExpenseFlow</h1>
+        </div>
+        <p class="tagline">Track smarter. Spend better.</p>
+      </div>
+    </header>
+
+    <main class="container app-main">
+      <!-- Dashboard summary -->
+      <section class="dashboard" aria-label="Summary dashboard">
+        <article class="card balance-card fade-in" tabindex="0">
+          <h2>Total Balance</h2>
+          <p id="totalBalance" class="balance-amount">$0.00</p>
+        </article>
+
+        <div class="summary-grid">
+          <article class="card summary-card income fade-in" tabindex="0">
+            <h3>Total Income</h3>
+            <p id="totalIncome">$0.00</p>
+          </article>
+          <article class="card summary-card expense fade-in" tabindex="0">
+            <h3>Total Expense</h3>
+            <p id="totalExpense">$0.00</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="grid-layout">
+        <!-- Add transaction form -->
+        <article class="card form-card fade-in">
+          <h2>Add Transaction</h2>
+          <form id="transactionForm" novalidate>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input id="description" name="description" type="text" placeholder="e.g. Grocery shopping" required />
+            </div>
+
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input id="amount" name="amount" type="number" step="0.01" min="0.01" placeholder="e.g. 120.50" required />
+            </div>
+
+            <div class="form-group">
+              <label for="type">Transaction Type</label>
+              <select id="type" name="type" required>
+                <option value="">Select Type</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Salary">Salary</option>
+                <option value="Travel">Travel</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Investment">Investment</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary">Add Transaction</button>
+            <p id="formMessage" class="form-message" aria-live="polite"></p>
+          </form>
+        </article>
+
+        <!-- Transaction history -->
+        <article class="card history-card fade-in">
+          <div class="history-header">
+            <h2>Transaction History</h2>
+            <div class="history-tools">
+              <label for="search" class="sr-only">Search transactions</label>
+              <input id="search" type="search" placeholder="Search description/category" />
+
+              <label for="filter" class="sr-only">Filter transactions</label>
+              <select id="filter">
+                <option value="all">All</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+
+              <button id="exportCsv" type="button" class="btn-secondary">Export CSV</button>
+            </div>
+          </div>
+
+          <ul id="transactionList" class="transaction-list" aria-live="polite"></ul>
+        </article>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="container">
+        <p>Built with HTML, CSS, and JavaScript. Offline-ready with LocalStorage.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
