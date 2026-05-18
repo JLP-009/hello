@@ -1,0 +1,1 @@
+export default function MarketStructure(){return <div className="space-y-3"><h1 className="text-xl font-semibold">Market Structure</h1><div className="card p-3">VWAP, CPR, support/resistance, liquidity zones, breakout, opening range, trend classification.</div><div className="card h-80 p-3">TradingView Lightweight Chart placeholder</div></div>}

@@ -1,0 +1,1 @@
+export default function SavedStrategies(){return <div className="space-y-3"><h1 className="text-xl font-semibold">Saved Strategies</h1><div className="card p-3">Persisted strategy snapshots from Supabase strategy_positions.</div></div>}

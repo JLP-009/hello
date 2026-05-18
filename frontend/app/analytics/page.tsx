@@ -1,0 +1,1 @@
+export default function AnalyticsPage(){return <div className="space-y-3"><h1 className="text-xl font-semibold">Institutional Analytics</h1><div className="grid grid-cols-2 gap-3">{["IV Heatmap","OI Heatmap","Gamma Exposure","PCR Trends","Volatility Trends","Theta Decay","Premium Decay"].map(x=><div key={x} className="card h-40 p-3">{x}</div>)}</div></div>}

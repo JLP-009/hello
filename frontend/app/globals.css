@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-terminal-bg text-slate-100 antialiased; }
+.card { @apply rounded-xl border border-terminal-border bg-terminal-card shadow-sm; }
