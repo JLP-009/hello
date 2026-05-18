@@ -53,6 +53,8 @@ export function PayoffGraph({ legs, currentSpot }: { legs: OptionLeg[]; currentS
         hovermode: "x unified",
         dragmode: "pan",
         shapes: [
+          { type: "rect", x0: Math.min(...x), x1: Math.max(...x), y0: 0, y1: summary.maxProfit, fillcolor: "rgba(34,197,94,0.08)", line: { width: 0 } },
+          { type: "rect", x0: Math.min(...x), x1: Math.max(...x), y0: summary.maxLoss, y1: 0, fillcolor: "rgba(239,68,68,0.08)", line: { width: 0 } },
           ...summary.breakevens.map((be) => ({
             type: "line",
             x0: be,

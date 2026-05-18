@@ -1,4 +1,4 @@
-export type OptionType = "CE" | "PE";
+export type OptionType = "CE" | "PE" | "FUT";
 export type Side = "BUY" | "SELL";
 
 export interface OptionLeg {
