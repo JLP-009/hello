@@ -1,15 +1,18 @@
 # Run Instructions (Beginner Friendly)
 
 ## 1) Prerequisites
-- Docker + Docker Compose
-- (Optional local dev) Node 20+, Python 3.12+, PostgreSQL 16+
+- Option A (easiest): Docker + Docker Compose
+- Option B (local): Node 20+, Python 3.12+
 
 ## 2) Environment setup
-At project root:
+From project root:
 ```bash
 cp .env.example .env
 ```
-Update all Firebase values:
+Required key:
+- `DATABASE_URL=sqlite+aiosqlite:///./data/app.db`
+
+Also set Firebase values:
 - `NEXT_PUBLIC_FIREBASE_*`
 - `FIREBASE_WEB_API_KEY`
 - `FIREBASE_PROJECT_ID`
@@ -27,15 +30,19 @@ docker compose up --build
 Services:
 - Frontend: `http://localhost:3000`
 - Backend: `http://localhost:8000`
-- Postgres: `localhost:5432`
 
-## 5) Local dev (without Docker)
+SQLite and logs persist in local folders:
+- `data/app.db`
+- `backend/logs/*.log`
+
+## 5) Run without Docker
 ### Backend
 ```bash
 cd backend
 python -m venv .venv && source .venv/bin/activate
 pip install -e .
-uvicorn app.main:app --reload
+cd ..
+uvicorn backend.app.main:app --reload
 ```
 
 ### Frontend
@@ -46,6 +53,6 @@ npm run dev
 ```
 
 ## 6) Troubleshooting
-- OTP not sent: check Firebase phone auth enabled and domain whitelist.
-- 401 from backend: verify `FIREBASE_WEB_API_KEY` matches frontend project.
-- DB connection issue: confirm `DATABASE_URL` points to reachable Postgres.
+- OTP not sent: ensure Firebase phone auth and localhost domain are enabled.
+- 401 from backend: verify `FIREBASE_WEB_API_KEY` belongs to the same Firebase project.
+- DB issues: delete `data/app.db` and restart to auto-create fresh tables.
