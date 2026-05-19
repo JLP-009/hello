@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Home(){return <main className='min-h-screen flex items-center justify-center'><div className='glass p-12 rounded-2xl text-center space-y-4'><h1 className='text-4xl font-semibold'>SaaS Foundation</h1><p className='text-zinc-400'>Secure auth-first dashboard starter.</p><Link className='px-4 py-2 rounded bg-indigo-500 hover:bg-indigo-400' href='/login'>Login</Link></div></main>}
