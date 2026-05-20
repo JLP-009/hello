@@ -3,13 +3,24 @@
 @tailwind utilities;
 
 :root { color-scheme: dark; }
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background: #071218;
   color: #e8f2ee;
   font-feature-settings: 'cv11', 'ss01';
 }
+
 * { box-sizing: border-box; }
+
 *:focus-visible {
   outline: 1px solid #3aa886;
   outline-offset: 1px;
