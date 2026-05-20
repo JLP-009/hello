@@ -17,7 +17,7 @@
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.15.4",
     "zustand": "^5.0.5",
-    "react-router-dom": "^7.6.0",
+    "react-router-dom": "^6.28.0",
     "lightweight-charts": "^5.0.7"
   },
   "devDependencies": {

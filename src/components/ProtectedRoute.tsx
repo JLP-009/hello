@@ -1,8 +1,10 @@
-import { Navigate } from 'react-router-dom'
+import { ReactElement } from 'react'
+import { Navigate, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
 
-export function ProtectedRoute({ children }: { children: JSX.Element }) {
+export function ProtectedRoute({ children }: { children: ReactElement }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
-  if (!isAuthenticated) return <Navigate to="/login" replace />
+  const location = useLocation()
+  if (!isAuthenticated) return <Navigate to="/login" replace state={{ from: location.pathname }} />
   return children
 }

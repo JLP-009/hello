@@ -1,7 +1,7 @@
-import { Eye, EyeOff, Lock, User, CandlestickChart } from 'lucide-react'
+import { Eye, EyeOff, Lock, User, CandlestickChart, Loader2 } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { FormEvent, useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
 
 export function LoginPage() {
@@ -9,13 +9,21 @@ export function LoginPage() {
   const [password, setPassword] = useState('')
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
-  const { login, error, loading } = useAuthStore()
+  const location = useLocation()
+  const { login, error, loading, isAuthenticated } = useAuthStore()
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const ok = await login(username, password)
-    if (ok) navigate('/dashboard')
+    const ok = await login(username.trim(), password.trim())
+    if (ok) {
+      const redirect = (location.state as { from?: string } | null)?.from ?? '/dashboard'
+      navigate(redirect === '/login' ? '/dashboard' : redirect, { replace: true })
+    }
   }
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/dashboard', { replace: true })
+  }, [isAuthenticated, navigate])
 
   return <div className="grid min-h-screen grid-cols-1 bg-terminal-bg-primary lg:grid-cols-2">
     <div className="flex items-center justify-center bg-white px-8 py-10">
@@ -28,7 +36,7 @@ export function LoginPage() {
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">Password</label>
         <div className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2"><Lock size={16} className="text-slate-400" /><input type={show?'text':'password'} value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full bg-transparent text-sm text-slate-800 outline-none"/><button type="button" onClick={()=>setShow(!show)} className="text-slate-400">{show?<EyeOff size={16}/>:<Eye size={16}/>}</button></div>
         {error && <p className="text-sm text-red-500">{error}</p>}
-        <button disabled={loading} className="w-full rounded-xl bg-terminal-accent-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">{loading ? 'Signing In...' : 'Sign In'}</button>
+        <button type="submit" disabled={loading} className="flex w-full items-center justify-center gap-2 rounded-xl bg-terminal-accent-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-70">{loading ? <><Loader2 size={14} className="animate-spin"/> Signing In...</> : 'Sign In'}</button>
       </motion.form>
     </div>
     <div className="relative hidden overflow-hidden bg-terminal-bg-secondary lg:block">

@@ -6,18 +6,37 @@ import { LoginPage } from './pages/LoginPage'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { TerminalPage } from './pages/TerminalPage'
 
+const protectedSections = [
+  { path: '/dashboard', section: 'Dashboard' },
+  { path: '/option-chain', section: 'Option Chain' },
+  { path: '/strategy-builder', section: 'Strategy Builder' },
+  { path: '/positions', section: 'Positions' },
+  { path: '/orders', section: 'Orders' },
+  { path: '/analytics', section: 'Analytics' },
+  { path: '/settings', section: 'Settings' },
+  { path: '/signals', section: 'Signals' },
+  { path: '/alerts', section: 'Alerts' },
+  { path: '/backtesting', section: 'Backtesting' },
+]
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<ProtectedRoute><TerminalPage section="Dashboard" /></ProtectedRoute>} />
-        <Route path="/option-chain" element={<ProtectedRoute><TerminalPage section="Option Chain" /></ProtectedRoute>} />
-        <Route path="/strategy-builder" element={<ProtectedRoute><TerminalPage section="Strategy Builder" /></ProtectedRoute>} />
-        <Route path="/positions" element={<ProtectedRoute><TerminalPage section="Positions" /></ProtectedRoute>} />
-        <Route path="/orders" element={<ProtectedRoute><TerminalPage section="Orders" /></ProtectedRoute>} />
-        <Route path="/analytics" element={<ProtectedRoute><TerminalPage section="Analytics" /></ProtectedRoute>} />
+        {protectedSections.map((r) => (
+          <Route
+            key={r.path}
+            path={r.path}
+            element={
+              <ProtectedRoute>
+                <TerminalPage section={r.section} />
+              </ProtectedRoute>
+            }
+          />
+        ))}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
