@@ -2,17 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
-
+:root { color-scheme: dark; }
 body {
   margin: 0;
-  background: #08141a;
-  color: #e6f4f1;
+  background: #071218;
+  color: #e8f2ee;
   font-feature-settings: 'cv11', 'ss01';
 }
-
-* {
-  box-sizing: border-box;
+* { box-sizing: border-box; }
+*:focus-visible {
+  outline: 1px solid #3aa886;
+  outline-offset: 1px;
 }
